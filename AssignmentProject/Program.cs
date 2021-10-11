@@ -10,7 +10,12 @@ namespace AssignmentProject
     {
         static void Main(string[] args)
         {
-            Person test = People.AddNewPerson("Mike", "Truck");
+
+            People.Clear();
+            TodoItems.Clear();
+            Person testPerson = People.AddNewPerson("Kalle", "Anka");
+            Todo testTodo = TodoItems.AddNewTodo("test", true);
+            Todo[] test = TodoItems.FindByAssignee(0);
         }
     }
 }

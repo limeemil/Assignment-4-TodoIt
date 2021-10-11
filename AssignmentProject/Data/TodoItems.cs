@@ -35,9 +35,14 @@ namespace AssignmentProject.Data
             throw new KeyNotFoundException("No task with that id");
         }
 
-        public static Todo AddNewTodo(String description)
+        public static Todo AddNewTodo(String description, bool addAssignee)
         {
             Todo newTodoItem = new Todo(TodoSequencer.nextTodoId(), description);
+            if (addAssignee && People.FindAll().Length > 0)
+            {
+                Person[] people = People.FindAll();
+                newTodoItem.Assignee = people[0];
+            }
             Todo[] temptodoItems = new Todo[todoItems.Length + 1];
             for (int i = 0; i < todoItems.Length; i++)
             {
@@ -56,6 +61,58 @@ namespace AssignmentProject.Data
         {
             todoItems = new Todo[0];
             TodoSequencer.reset();
+        }
+
+        public static Todo[] FindByDoneStatus(bool doneStatus)
+        {
+            Todo[] result = new Todo[todoItems.Length];
+            for (int i = 0; i < todoItems.Length; i++)
+            {
+                if (todoItems[i].Done == doneStatus)
+                {
+                    result[i] = todoItems[i];
+                }
+            }
+            return result;
+        }
+
+        public static Todo[] FindByAssignee(int personId)
+        {
+            Todo[] result = new Todo[todoItems.Length];
+            for (int i = 0; i < todoItems.Length; i++)
+            {
+                if (todoItems[i].Assignee.PersonId == personId)
+                {
+                    result[i] = todoItems[i];
+                }
+            }
+            return result;
+        }
+
+        public static Todo[] FindByAssignee(Person assignee)
+        {
+            Todo[] result = new Todo[todoItems.Length];
+            for (int i = 0; i < todoItems.Length; i++)
+            {
+                if (todoItems[i].Assignee == assignee)
+                {
+                    result[i] = todoItems[i];
+                }
+            }
+            return result;
+        }
+
+        public static Todo[] FindUnassignedTodoItems()
+        {
+            Todo[] result = new Todo[todoItems.Length];
+            for (int i = 0; i < todoItems.Length; i++)
+            {
+                if (todoItems[i].Assignee == null)
+                {
+                    result[i] = todoItems[i];
+                }
+            }
+            return result;
         }
     }
 }
