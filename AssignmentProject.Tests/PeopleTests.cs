@@ -19,6 +19,7 @@ namespace AssignmentProject.Tests
         [Fact]
         public void ShouldReturnPersonArray()
         {
+            People.Clear();
             Person[] testPeople = new Person[People.FindAll().Length];
             Assert.Equal(testPeople, People.FindAll());
         }
