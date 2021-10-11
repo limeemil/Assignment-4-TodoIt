@@ -11,6 +11,7 @@ namespace AssignmentProject.Tests
         [Fact]
         public void TodoIdTests()
         {
+            TodoSequencer.reset();
             Assert.Equal(1, TodoSequencer.nextTodoId());
             Assert.Equal(2, TodoSequencer.nextTodoId());
             Assert.Equal(3, TodoSequencer.nextTodoId());

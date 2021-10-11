@@ -91,5 +91,16 @@ namespace AssignmentProject.Tests
             Assert.NotEmpty(TodoItems.FindUnassignedTodoItems());
             Assert.Equal(testTodo.TodoId, TodoItems.FindUnassignedTodoItems()[0].TodoId);
         }
+
+        [Fact]
+        public void ShouldRemoveTodo()
+        {
+            TodoItems.Clear();
+            Todo todo1 = TodoItems.AddNewTodo("test1", false);
+            Todo todo2 = TodoItems.AddNewTodo("test2", false);
+            Assert.Equal(2, TodoItems.Size());
+            TodoItems.RemoveTodo(1);
+            Assert.Equal("test2", TodoItems.FindAll()[0].Description);
+        }
     }
 }

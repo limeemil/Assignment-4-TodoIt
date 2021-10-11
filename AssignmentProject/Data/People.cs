@@ -40,7 +40,7 @@ namespace AssignmentProject.Data
             Person newPerson = new Person(PersonSequencer.nextPersonId());
             newPerson.FirstName = firstName;
             newPerson.LastName = lastName;
-            Person[] tempPeople = new Person[people.Length+1];
+            Person[] tempPeople = new Person[people.Length + 1];
             for (int i = 0; i < people.Length; i++)
             {
                 tempPeople[i] = people[i];
@@ -58,6 +58,29 @@ namespace AssignmentProject.Data
         {
             people = new Person[0];
             PersonSequencer.reset();
+        }
+
+        public static void RemovePerson(int personId)
+        {
+            Person[] tempPeople = new Person[people.Length];
+            int personsRemoved = 0, j = 0;
+            for (int i = 0; i < people.Length; i++)
+            {
+                if (people[i].PersonId != personId)
+                {
+                    tempPeople[j] = people[i];
+                    j++;
+                }
+                else
+                {
+                    personsRemoved++;
+                }
+            }
+            people = new Person[tempPeople.Length - personsRemoved];
+            for (int i = 0; i < people.Length; i++)
+            {
+                people[i] = tempPeople[i];
+            }
         }
     }
 }

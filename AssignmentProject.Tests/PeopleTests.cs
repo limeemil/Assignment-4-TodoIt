@@ -51,5 +51,16 @@ namespace AssignmentProject.Tests
             People.Clear();
             Assert.Equal(0, People.Size());
         }
+
+        [Fact]
+        public void ShouldRemovePerson()
+        {
+            People.Clear();
+            Person person1 = People.AddNewPerson("Musse", "Pigg");
+            Person person2 = People.AddNewPerson("Kalle", "Anka");
+            Assert.Equal(2, People.Size());
+            People.RemovePerson(1);
+            Assert.Equal("Kalle", People.FindAll()[0].FirstName);
+        }
     }
 }

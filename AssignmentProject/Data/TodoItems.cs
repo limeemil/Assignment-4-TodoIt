@@ -40,8 +40,8 @@ namespace AssignmentProject.Data
             Todo newTodoItem = new Todo(TodoSequencer.nextTodoId(), description);
             if (addAssignee && People.FindAll().Length > 0)
             {
-                Person[] people = People.FindAll();
-                newTodoItem.Assignee = people[0];
+                Person[] todoItems = People.FindAll();
+                newTodoItem.Assignee = todoItems[0];
             }
             Todo[] temptodoItems = new Todo[todoItems.Length + 1];
             for (int i = 0; i < todoItems.Length; i++)
@@ -114,5 +114,29 @@ namespace AssignmentProject.Data
             }
             return result;
         }
+
+        public static void RemoveTodo(int todoId)
+        {
+            Todo[] temptodoItems = new Todo[todoItems.Length];
+            int todosRemoved = 0, j = 0;
+            for (int i = 0; i < todoItems.Length; i++)
+            {
+                if (todoItems[i].TodoId != todoId)
+                {
+                    temptodoItems[j] = todoItems[i];
+                    j++;
+                }
+                else
+                {
+                    todosRemoved++;
+                }
+            }
+            todoItems = new Todo[temptodoItems.Length - todosRemoved];
+            for (int i = 0; i < todoItems.Length; i++)
+            {
+                todoItems[i] = temptodoItems[i];
+            }
+        }
     }
+    
 }
