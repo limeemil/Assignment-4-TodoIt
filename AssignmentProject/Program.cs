@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using AssignmentProject.Data;
+using AssignmentProject.Model;
 
 namespace AssignmentProject
 {
@@ -8,7 +10,7 @@ namespace AssignmentProject
     {
         static void Main(string[] args)
         {
-
+            Person test = People.AddNewPerson("Mike", "Truck");
         }
     }
 }
